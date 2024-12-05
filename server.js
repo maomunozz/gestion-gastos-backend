@@ -19,6 +19,9 @@ mongoose
 app.get("/", (req, res) => {
   res.send("Servidor funcionando correctamente");
 });
+app.use("/auth", require("./routes/authRoutes"));
+app.use("/expenses", require("./routes/expenseRoutes"));
+app.use("/categories", require("./routes/categoryRoutes"));
 
 // Inicia el servidor
 const PORT = process.env.PORT || 5000;
