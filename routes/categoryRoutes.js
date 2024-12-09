@@ -43,7 +43,7 @@ router.put("/:id", auth, async (req, res) => {
 
   try {
     const category = await Category.findOneAndUpdate(
-      { _id: req.params.id, user: req.user._id },
+      { _id: req.params.id, user: req.user.id },
       { name },
       { new: true, runValidators: true }
     );
@@ -63,7 +63,7 @@ router.delete("/:id", auth, async (req, res) => {
   try {
     const category = await Category.findOneAndDelete({
       _id: req.params.id,
-      user: req.user._id,
+      user: req.user.id,
     });
 
     if (!category)
