@@ -18,6 +18,4 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-Corrección de hash
-
 module.exports = mongoose.model("User", userSchema);
