@@ -58,22 +58,4 @@ router.put("/:id", auth, async (req, res) => {
   }
 });
 
-// Eliminar una categoría
-router.delete("/:id", auth, async (req, res) => {
-  try {
-    const category = await Category.findOneAndDelete({
-      _id: req.params.id,
-      user: req.user.id,
-    });
-
-    if (!category)
-      return res.status(404).json({ error: "Categoría no encontrada" });
-
-    res.json({ message: "Categoría eliminada correctamente" });
-  } catch (error) {
-    res.status(500).json({ error: "Error al eliminar la categoría" });
-    console.log(error);
-  }
-});
-
 module.exports = router;
