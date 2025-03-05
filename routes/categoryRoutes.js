@@ -14,6 +14,17 @@ router.post("/", auth, async (req, res) => {
         .json({ error: "El nombre de la categoría es obligatorio" });
     }
 
+    // Verificar si ya existe una categoría con el mismo nombre para el mismo usuario
+    const categoryExists = await Category.findOne({
+      name: name.trim(),
+      user: req.user.id,
+    });
+    if (categoryExists) {
+      return res
+        .status(400)
+        .json({ error: "Ya existe una categoria con este nombre" });
+    }
+
     const category = new Category({
       name,
       user: req.user.id, // Asegúrate de que `auth` middleware añada `req.user`
